@@ -12,7 +12,7 @@ RSpec.describe Patient, type: :model  do
       description: "sick",
       gender: "male",
       blood_type: "O-",
-      date_of_birth: 2001-07-07
+      date_of_birth: 12.years.ago
     })
   end
 
@@ -74,7 +74,7 @@ RSpec.describe Patient, type: :model  do
   end
 
   it "should have a date_of_birth" do
-    expect(subject.date_of_birth).to eq(2001-07-07)
+    expect(subject.date_of_birth).to eq(12.years.ago.to_date)
   end
 
   it "should NOT have a date_of_birth" do
@@ -150,57 +150,57 @@ RSpec.describe Patient, type: :model  do
     ])
   end
 
-  # it "should be able to transfer to 3 states from doctor_checkup" do
-  #   subject.save
-  #   subject.to_doctor!
-  #   expect(subject.current_state.events.keys).to eq([
-  #     :to_xray,
-  #     :to_surgery,
-  #     :to_pay_bill
-  #   ])
-  # end
+  it "should be able to transfer to 3 states from doctor_checkup" do
+    subject.save
+    subject.to_doctor!
+    expect(subject.current_state.events.keys).to eq([
+      :to_xray,
+      :to_surgery,
+      :to_pay_bill
+    ])
+  end
 
-  # it "should be able to transfer to 3 states from xray" do
-  #   subject.save
-  #   subject.to_doctor!
-  #   subject.to_xray!
-  #   expect(subject.current_state.events.keys).to eq([
-  #     :to_doctor,
-  #     :to_surgery,
-  #     :to_pay_bill
-  #    ])
-  # end
+  it "should be able to transfer to 3 states from xray" do
+    subject.save
+    subject.to_doctor!
+    subject.to_xray!
+    expect(subject.current_state.events.keys).to eq([
+      :to_doctor,
+      :to_surgery,
+      :to_pay_bill
+     ])
+  end
 
-  # it "should be able to transfer to 3 states from surgery" do
-  #   subject.save
-  #   subject.to_doctor!
-  #   subject.to_xray!
-  #   subject.to_surgery!
-  #   expect(subject.current_state.events.keys).to eq([
-  #     :to_doctor,
-  #     :to_xray,
-  #     :to_pay_bill
-  #    ])
-  # end
+  it "should be able to transfer to 3 states from surgery" do
+    subject.save
+    subject.to_doctor!
+    subject.to_xray!
+    subject.to_surgery!
+    expect(subject.current_state.events.keys).to eq([
+      :to_doctor,
+      :to_xray,
+      :to_pay_bill
+     ])
+  end
 
-    # it "should be able to transfer to 1 state from pay_bill" do
-    #   subject.save
-    #   subject.to_doctor!
-    #   subject.to_pay_bill!
-    #   expect(subject.current_state.events.keys).to eq([
-    #     :leave
-    #   ])
-    # end
+    it "should be able to transfer to 1 state from pay_bill" do
+      subject.save
+      subject.to_doctor!
+      subject.to_pay_bill!
+      expect(subject.current_state.events.keys).to eq([
+        :leave
+      ])
+    end
 
-    # it "should be able to transfer to 1 state from left" do
-    #   subject.save
-    #   subject.to_doctor!
-    #   subject.to_pay_bill!
-    #   subject.leave!
-    #   expect(subject.current_state.events.keys).to eq([
-    #     :wait
-    #   ])
-    # end
+    it "should be able to transfer to 1 state from left" do
+      subject.save
+      subject.to_doctor!
+      subject.to_pay_bill!
+      subject.leave!
+      expect(subject.current_state.events.keys).to eq([
+        :wait
+      ])
+    end
 
     it "should have ability to add doctors" do
       subject.doctors << doctor
@@ -226,14 +226,3 @@ RSpec.describe Patient, type: :model  do
 
   
 end
-
-  # t.string   "first_name",     limit: 255
-  #   t.string   "last_name",      limit: 255
-  #   t.date     "date_of_birth"
-  #   t.text     "description",    limit: 65535
-  #   t.string   "gender",         limit: 255
-  #   t.string   "blood_type",     limit: 255
-  #   t.datetime "created_at",                   null: false
-  #   t.datetime "updated_at",                   null: false
-  #   t.integer  "clinic_id",      limit: 4
-  #   t.string   "workflow_state", limit: 255
