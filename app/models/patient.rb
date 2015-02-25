@@ -21,6 +21,7 @@ class Patient < ActiveRecord::Base
   validates :gender, presence: true
   validates :blood_type, presence: true
   validate :at_least_10
+  
   def at_least_10
     if self.date_of_birth
         errors.add(:date_of_birth, 'Error. Patient must be at least 10 years old') if self.date_of_birth > 10.years.ago.to_date  

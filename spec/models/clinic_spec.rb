@@ -74,7 +74,7 @@ RSpec.describe Clinic, type: :model do
     expect(clinic.errors).to include(:name)
   end
 
-  it "should have doctors by default" do
+  it "should have ability to add doctors" do
     subject.doctors << doctor
     expect(subject.doctors.length).to eq(1)
   end
