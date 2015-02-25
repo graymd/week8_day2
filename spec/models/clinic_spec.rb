@@ -84,7 +84,9 @@ RSpec.describe Clinic, type: :model do
     expect(subject.patients.length).to eq(1)
   end
 
+  it {should have_many(:patients)}
 
+  it {should have_many(:doctors)}
   
 end
 

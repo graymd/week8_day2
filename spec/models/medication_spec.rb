@@ -69,11 +69,9 @@ RSpec.describe Medication, type: :model do
     expect(subject.patients.length).to eq(1)
   end
 
+  it {should have_many(:patients)}
+
+  it {should have_many(:patient_medications)}
+
   
 end
-
-
-    # t.string   "name",              limit: 255
-    # t.string   "company",           limit: 255
-    # t.string   "adverse_reactions", limit: 255
-    # t.boolean  "generic_option",  

@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Patient, type: :model  do
+RSpec.describe PatientMedication, type: :model  do
   
+  it {should belong_to(:patient)}
 
-#need to validate the belongs to relationship.
+  it {should belong_to(:medication)}
 
 end

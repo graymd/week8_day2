@@ -47,8 +47,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  
   #rspec testing framework
   gem 'rspec-rails', '~> 3.0'
+
+  #makes tests easier on the fingers and eyes: https://github.com/thoughtbot/shoulda
+  gem 'shoulda'
+
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 

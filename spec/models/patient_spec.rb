@@ -1,8 +1,9 @@
 require 'rails_helper'
 require 'date'
 
-@date = Date.new(2001,2,3)
-@date.strftime('%Y%m%d')
+# date = Date.new(2014, 10, 24)
+# date.to_formatted_s(:db)
+# use above to fix 105-113 below
 
 RSpec.describe Patient, type: :model  do
   subject do
@@ -183,36 +184,44 @@ RSpec.describe Patient, type: :model  do
      ])
   end
 
-    it "should be able to transfer to 1 state from pay_bill" do
-      subject.save
-      subject.to_doctor!
-      subject.to_pay_bill!
-      expect(subject.current_state.events.keys).to eq([
-        :leave
-      ])
-    end
+  it "should be able to transfer to 1 state from pay_bill" do
+    subject.save
+    subject.to_doctor!
+    subject.to_pay_bill!
+    expect(subject.current_state.events.keys).to eq([
+      :leave
+    ])
+  end
 
-    it "should be able to transfer to 1 state from left" do
-      subject.save
-      subject.to_doctor!
-      subject.to_pay_bill!
-      subject.leave!
-      expect(subject.current_state.events.keys).to eq([
-        :wait
-      ])
-    end
+  it "should be able to transfer to 1 state from left" do
+    subject.save
+    subject.to_doctor!
+    subject.to_pay_bill!
+    subject.leave!
+    expect(subject.current_state.events.keys).to eq([
+      :wait
+    ])
+  end
 
-    it "should have ability to add doctors" do
-      subject.doctors << doctor
-      expect(subject.doctors.length).to eq(1)
-    end
+  it "should have ability to add doctors" do
+    subject.doctors << doctor
+    expect(subject.doctors.length).to eq(1)
+  end
 
-    it "should have ability to add medications" do
-      subject.medications << medication
-      expect(subject.medications.length).to eq(1)
-    end
+  it "should have ability to add medications" do
+    subject.medications << medication
+    expect(subject.medications.length).to eq(1)
+  end
 
-    #Need to check that belongs to is valid
+  it {should belong_to(:clinic)}
+
+  it {should have_many(:patient_medications)}
+
+  it {should have_many(:medications)}
+
+  it {should have_many(:doctors)}
+
+
 
 
 
